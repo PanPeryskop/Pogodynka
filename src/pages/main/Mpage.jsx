@@ -94,10 +94,10 @@ function Mpage() {
 
   return (
     <div className="main-page">
-      <div className="search-section">
+      <div className="main-search-section">
         <form onSubmit={handleSearch} className="search-form">
-          <div className="search-wrapper">
-            <MdSearch className="search-icon" />
+          <div className="main-search-wrapper">
+            <MdSearch className="main-search-icon" />
             <input
               type="text"
               id="main-search-input"
@@ -108,7 +108,7 @@ function Mpage() {
           </div>
           <motion.button
             type="button"
-            className="map-button"
+            className="main-map-button"
             onClick={() => navigate('/maps')}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -118,24 +118,24 @@ function Mpage() {
         </form>
       </div>
 
-      <div className="cities-grid">
+      <div className="main-cities-grid">
         {citiesData.map((city, index) => (
           <motion.div
             key={city.city}
-            className="city-card"
+            className="main-city-card"
             onClick={() => navigate(`/forecast/${city.coords}`)}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -5 }}
           >
-            <div className="city-header">
+            <div className="main-city-header">
               <h2>{city.city}</h2>
               <Metric>{Math.round(city.current.temp)}°C</Metric>
             </div>
 
-            <div className="charts">
-              <div className="chart-container">
+            <div className="main-charts">
+              <div className="main-chart-container">
                 <h3>Temperature</h3>
                 <ResponsiveContainer width="100%" height={100}>
                   <AreaChart data={city.daily}>
@@ -182,7 +182,7 @@ function Mpage() {
               </div>
             </div>
 
-            <div className="city-details">
+            <div className="main-city-details">
               <Card>
                 <Text>Humidity</Text>
                 <Metric>{Math.round(city.current.humidity)}%</Metric>
