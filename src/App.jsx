@@ -5,6 +5,7 @@ import NavigationBar from "./components/Navigation.jsx";
 // import Maps from "./components/maps/Map.jsx";
 import MapsPage from "./pages/maps/Maps.jsx";
 import Forecast from "./pages/forecast/Forecast.jsx";
+import Mpage from "./pages/main/Mpage.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,13 +17,8 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={
-              <div className="counter-container">
-                <h1 className={count > 10 ? "rainbow-text" : ""}>Counter</h1>
-                <p>{count}</p>
-                <div id="buttons">
-                  <button onClick={() => setCount(count + 1)}>Increment</button>
-                  <button onClick={() => setCount(count - 1)}>Decrement</button>
-                </div>
+              <div className="Mpage">
+                <Mpage />
               </div>
             } />
             <Route path="/maps" element={<MapsPage />} />
