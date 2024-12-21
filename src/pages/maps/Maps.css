@@ -40,23 +40,26 @@
   bottom: 1.5rem; 
   right: 7.5rem;  
   width: 64px;  
-  height: 60px;
+  height: 64px;
   border-radius: 50%;
-  background: #fff;       
-  color: #000;            
-  font-size: 1.8rem; 
-  line-height: 0; 
-  padding: 0; 
+  background: linear-gradient(135deg, #8b5cf6, #8b5cf6);
+  color: white;
+  font-size: 1.8rem;
+  line-height: 0;
+  padding: 0;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: background 0.3s;
-  display: flex;          
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s, transform 0.2s;
+  display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
+
 .help-button:hover {
-  background: #eee; 
+  background: linear-gradient(135deg, #7c69f8, #a17dfa);
+  transform: scale(1.05);
 }
 
 .help-popup {
@@ -70,6 +73,7 @@
   align-items: center;
   z-index: 999;
   animation: fadeIn 0.3s forwards;
+  
 }
 
 .help-overlay {
@@ -82,8 +86,8 @@
 
 .help-content {
   position: relative;
-  background: #fff;
-  color: #000000;
+  background: #6c6b6bbd;
+  color: #ffffff;
   padding: 2rem;
   border-radius: 8px;
   max-width: 400px;
@@ -107,7 +111,7 @@
 }
 
 .close-button {
-  background: #000000;
+  background: #8b5cf6;
   color: #fff;
   border: none;
   border-radius: 4px;

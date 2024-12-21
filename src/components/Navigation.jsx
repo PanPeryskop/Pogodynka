@@ -1,6 +1,7 @@
 import './Navigation.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { MdSearch } from 'react-icons/md';
 
 function NavigationBar() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,8 +18,11 @@ function NavigationBar() {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <div className="nav-logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-            Pogodynka
+        <div 
+          className="nav-logo" 
+          onClick={() => navigate('/')}
+        >
+          Pogodynka
         </div>
         <ul className="nav-menu">
           <li className="nav-item">
@@ -32,13 +36,16 @@ function NavigationBar() {
           </li>
           <li className="nav-item">
             <form className="search-form" onSubmit={handleSearch}>
-              <input
-                type="text"
-                placeholder="Search location..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="search-input"
-              />
+              <div className="search-wrapper">
+                <MdSearch className="search-icon" />
+                <input
+                  type="text"
+                  placeholder="Search location..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-input"
+                />
+              </div>
             </form>
           </li>
         </ul>
