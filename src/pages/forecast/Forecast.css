@@ -1,0 +1,80 @@
+.forecast-page {
+  min-height: 100vh;
+  background: hsl(240 10% 3.9%);
+  color: hsl(0 0% 98%);
+  padding-top: 5rem;
+}
+
+.forecast-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.forecast-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.forecast-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.location-name {
+  color: hsl(240 5% 64.9%);
+  font-size: 1.1rem;
+}
+
+.weather-card {
+  background: hsl(240 10% 5.9%);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1rem 0;
+  border: 1px solid hsl(240 3.7% 15.9%);
+}
+
+.temperature {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.day-card {
+  background: hsl(240 10% 5.9%);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid hsl(240 3.7% 15.9%);
+}
+
+.day-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: hsl(240 5% 64.9%);
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  color: hsl(240 5% 64.9%);
+}
+
+.error {
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .forecast-content {
+    padding: 1rem;
+  }
+  
+  .forecast-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

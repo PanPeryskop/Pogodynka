@@ -1,0 +1,10 @@
+Wymagania:
+- Wykorzystanie otwartego api z prognozą pogody - przykład: https://open-meteo.com/
+- Aplikacja powinna prezentować aktualną prognozę pogody dla wybranego miejsca na świecie.
+- Informacje o aktualnej pogodzie: temperatura, wilgotność, prędkość i kierunek wiatru oraz ikona symbolizująca warunki atmosferyczne
+- Informacje o prognozie na 7 najbliższych dni: temperatura max/min, prędkość wiatru (średnia albo maksymalna), przeważający kierunek wiatru oraz ikona symbolizująca warunki atmosferyczne
+- Pobieranie danych z API odbywa się w sposób nieblokujący (asynchroniczny)
+- Informacje o teraźniejszej pogodnie stanowią osoby komponent podobnie jak każdy dzień w prognozie pogody stanowi osobny komponent ReactJS
+- Należy również zwrócić uwagę na aspekt wizualny aplikacji - komponenty powinny być odgraniczone, teksty czytelne, istotne informacje odpowiednio wyeksponowane
+- Strona powinna być również responsywna (co najmniej dostosowywać się do szerokości okna)
+- Dodatkowa opcja to zmiana koloru / obrazu tła w zależności od dzisiejszej pogody

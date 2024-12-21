@@ -1,0 +1,56 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+#buttons button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: hsl(240 10% 3.9%);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#buttons button:hover {
+  background-color: hsl(240 10% 10%);
+  transform: translateY(-1px);
+}
+
+.rainbow-text {
+  background-image: linear-gradient(
+    90deg,
+    #ff0000 0%,
+    #ff8000 14%,
+    #ffff00 28%,
+    #00ff00 42%,
+    #00ffff 56%,
+    #0000ff 70%,
+    #8000ff 84%,
+    #ff0080 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: rainbow 2s linear infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}

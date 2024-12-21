@@ -1,0 +1,64 @@
+.map-container {
+  aspect-ratio: 1/1;
+  max-width: 800px;
+  height: 800px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.popup-content {
+  padding: 10px;
+  text-align: center;
+}
+
+.popup-content h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.popup-content p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.weather-button {
+  margin-top: 10px;
+  padding: 5px 15px;
+  background: #1c1c1c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-button:hover {
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #8f00ff,
+    #ff0000
+  );
+  background-size: 200% 100%;
+  animation: rainbow-wave 2s linear infinite;
+  transform: scale(1.05);
+}
+
+@keyframes rainbow-wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
