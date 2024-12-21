@@ -12,7 +12,11 @@ const getCoordinates = async (locationId) => {
     `https://geocoding-api.open-meteo.com/v1/search?name=${locationId}&count=1&language=en&format=json`
   );
   const data = await response.json();
-  console.log(data);
+  console.log('Geocoding Response:', {
+    query: locationId,
+    response: data,
+    timestamp: new Date().toISOString()
+  });
   if (!data.results?.length) throw new Error('Location not found');
   return { 
     lat: data.results[0].latitude, 
@@ -48,6 +52,10 @@ const getLocationName = async (lat, lon) => {
 const getIpLocation = async () => {
   const response = await fetch('https://ipapi.co/json/');
   const data = await response.json();
+  console.log('IP Location Response:', {
+    data,
+    timestamp: new Date().toISOString()
+  });
   return {
     lat: data.latitude,
     lon: data.longitude,
@@ -80,6 +88,11 @@ function Forecast() {
         if (!response.ok) throw new Error('Weather API failed');
         
         const data = await response.json();
+        console.log('Weather API Response:', {
+            location: location.name,
+            data,
+            timestamp: new Date().toISOString()
+          });
         setWeather({ ...data, locationName: location.name });
         setError(null);
       } catch (err) {
