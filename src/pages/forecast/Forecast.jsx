@@ -2,31 +2,48 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Forecast.css';
 
-// Utility functions
 const getCoordinates = async (locationId) => {
   if (locationId?.includes(',')) {
     const [lat, lon] = locationId.split(',').map(coord => parseFloat(coord));
-    return { lat, lon };
+    const locationName = await getLocationName(lat, lon);
+    return { lat, lon, name: locationName };
   }
   const response = await fetch(
     `https://geocoding-api.open-meteo.com/v1/search?name=${locationId}&count=1&language=en&format=json`
   );
   const data = await response.json();
+  console.log(data);
   if (!data.results?.length) throw new Error('Location not found');
-  return { lat: data.results[0].latitude, lon: data.results[0].longitude };
+  return { 
+    lat: data.results[0].latitude, 
+    lon: data.results[0].longitude,
+    name: data.results[0].name 
+  };
 };
 
 const getLocationName = async (lat, lon) => {
-  try {
-    const response = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?latitude=${lat}&longitude=${lon}&count=1&language=en&format=json`
-    );
-    const data = await response.json();
-    return data.results?.[0]?.name || `${lat.toFixed(2)}°, ${lon.toFixed(2)}°`;
-  } catch (error) {
-    return `${lat.toFixed(2)}°, ${lon.toFixed(2)}°`;
-  }
-};
+    try {
+      // Use Nominatim for reverse geocoding
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`,
+        {
+          headers: {
+            'User-Agent': 'WeatherApp/1.0'
+          }
+        }
+      );
+      const data = await response.json();
+      // Extract city or town name from address
+      return data.address?.city || 
+             data.address?.town || 
+             data.address?.village || 
+             data.address?.municipality ||
+             `${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E`;
+    } catch (err) {
+      console.error('Reverse geocoding failed:', err);
+      return `${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E`;
+    }
+  };
 
 const getIpLocation = async () => {
   const response = await fetch('https://ipapi.co/json/');
@@ -48,28 +65,22 @@ function Forecast() {
     const fetchWeather = async () => {
       try {
         setLoading(true);
-        let lat, lon, locationName;
+        let location;
 
         if (locationId) {
-          const coords = await getCoordinates(locationId);
-          lat = coords.lat;
-          lon = coords.lon;
-          locationName = await getLocationName(lat, lon);
+          location = await getCoordinates(locationId);
         } else {
-          const ipLocation = await getIpLocation();
-          lat = ipLocation.lat;
-          lon = ipLocation.lon;
-          locationName = ipLocation.name;
+          location = await getIpLocation();
         }
 
         const response = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,precipitation_probability_mean&current=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=auto`
+          `https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,precipitation_probability_mean&current=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=auto`
         );
 
         if (!response.ok) throw new Error('Weather API failed');
         
         const data = await response.json();
-        setWeather({ ...data, locationName });
+        setWeather({ ...data, locationName: location.name });
         setError(null);
       } catch (err) {
         console.error('Error:', err);
