@@ -35,18 +35,18 @@
   overflow: hidden;
 }
 
-/* Existing styles... */
 .help-button {
   position: fixed;
   bottom: 1.5rem; 
   right: 7.5rem;  
-  width: 60px;
+  width: 64px;  
   height: 60px;
   border-radius: 50%;
   background: #fff;       
   color: #000;            
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1.8rem; 
+  line-height: 0; 
+  padding: 0; 
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -55,7 +55,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .help-button:hover {
   background: #eee; 
 }
@@ -154,3 +153,4 @@
 .help-popup.close .help-overlay {
   animation: fadeOutOverlay 0.5s ease-out forwards;
 }
+

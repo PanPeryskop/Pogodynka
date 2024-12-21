@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Maps from '../../components/maps/Map.jsx';
-import NavigationBar from '../../components/Navigation.jsx';
+// import NavigationBar from '../../components/Navigation.jsx';
 import './Maps.css';
 
 function MapsPage() {
@@ -21,9 +21,10 @@ function MapsPage() {
     }
   };
 
+
   return (
     <div className="maps-page">
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <div className="maps-content">
         <header className="maps-header">
           <h1>Interactive Weather Map</h1>
