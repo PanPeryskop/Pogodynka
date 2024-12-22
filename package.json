@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://https://panperyskop.github.io./Pogodynka",
-
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "predeploy": "npm run build",
     "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
