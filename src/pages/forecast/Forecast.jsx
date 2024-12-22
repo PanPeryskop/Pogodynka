@@ -63,7 +63,7 @@ const getCurrentWeatherIcon = (weatherCode) => {
        (weatherCode >= 51 && weatherCode <= 55) || 
        (weatherCode >= 61 && weatherCode <= 65) ||
        (weatherCode >= 80 && weatherCode <= 82) ? <Rainy /> :
-       weatherCode >= 71 && weatherCode <= 77 ? <Snowy /> :
+       weatherCode >= 71 && weatherCode <= 77 ? <Rainy /> :
        <Clouds />}
     </div>
   );
