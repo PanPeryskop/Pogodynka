@@ -21,7 +21,7 @@ function Mpage() {
     { name: 'New York', coords: { lat: 40.7128, lon: -74.0060 } },
     { name: 'Tokyo', coords: { lat: 35.4122, lon: 139.4130 } },
     { name: 'Sydney', coords: { lat: -33.8688, lon: 151.2093 } },
-    { name: 'Dubai', coords: { lat: 25.2048, lon: 55.2708 } }
+    { name: 'Warsaw', coords: { lat: 52.2297, lon: 21.0122 } }
   ];
 
   useEffect(() => {

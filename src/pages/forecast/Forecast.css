@@ -157,3 +157,61 @@
   }
 }
 
+.day-card {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.temperature-section {
+  margin: 16px 0;
+}
+
+.temp-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.max-temp, .min-temp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-size: 0.8em;
+  color: hsl(240 5% 64.9%);
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.weather-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.metric .icon {
+  font-size: 1.5em;
+  color: hsl(240 5% 64.9%);
+}
+
+.metric-data {
+  display: flex;
+  flex-direction: column;
+}
