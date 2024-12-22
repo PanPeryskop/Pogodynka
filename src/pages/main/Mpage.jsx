@@ -7,6 +7,11 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'rec
 import { Card, Metric, Text } from "@tremor/react";
 import './Mpage.css';
 import Loader from '../../components/Loading';
+import Clouds from '../../components/weather/Couds';
+import Rainy from '../../components/weather/Rain';
+import Sunny from '../../components/weather/sunny';
+import SunClouds from '../../components/weather/Suncouds';
+
 
 function Mpage() {
   const [mainSearch, setMainSearch] = useState('');
@@ -24,19 +29,35 @@ function Mpage() {
     { name: 'Warsaw', coords: { lat: 52.2297, lon: 21.0122 } }
   ];
 
+  
+  const getCurrentWeatherIcon = (weatherCode) => {
+    console.log(weatherCode);
+    return (
+      <div className="small-weather-icon">
+        {weatherCode <= 1 ? <Sunny /> :
+         weatherCode <= 2 ? <SunClouds /> :
+         (weatherCode >= 51 && weatherCode <= 55) || 
+         (weatherCode >= 61 && weatherCode <= 65) ||
+         (weatherCode >= 80 && weatherCode <= 82) ? <Rainy /> :
+         weatherCode >= 71 && weatherCode <= 77 ? <Snowy /> :
+         <Clouds />}
+      </div>
+    );
+  };
+
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
         setLoading(true);
         const weatherPromises = popularCities.map(async (city) => {
-          const [weatherResponse, airQualityResponse] = await Promise.all([
+            const [weatherResponse, airQualityResponse] = await Promise.all([
             fetch(
-              `https://api.open-meteo.com/v1/forecast?latitude=${city.coords.lat}&longitude=${city.coords.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_mean&current=temperature_2m,relativehumidity_2m,windspeed_10m&timezone=auto`
+              `https://api.open-meteo.com/v1/forecast?latitude=${city.coords.lat}&longitude=${city.coords.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_mean&current=temperature_2m,relativehumidity_2m,windspeed_10m,weathercode&timezone=auto`
             ),
             fetch(
               `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${city.coords.lat}&longitude=${city.coords.lon}&current=us_aqi,pm10,pm2_5`
             )
-          ]);
+            ]);
 
           const [weatherData, airData] = await Promise.all([
             weatherResponse.json(),
@@ -46,14 +67,17 @@ function Mpage() {
           return {
             city: city.name,
             coords: `${city.coords.lat},${city.coords.lon}`,
+            
             current: {
               temp: weatherData.current.temperature_2m,
+              weathercode: weatherData.current.weathercode, // Add this
               humidity: weatherData.current.relativehumidity_2m,
               wind: weatherData.current.windspeed_10m,
               aqi: airData.current.us_aqi,
               pm10: airData.current.pm10,
               pm25: airData.current.pm2_5
             },
+          
             daily: weatherData.daily.time.map((date, i) => ({
               date: new Date(date).toLocaleDateString('en-US', { weekday: 'short' }),
               temp: weatherData.daily.temperature_2m_max[i],
@@ -61,6 +85,8 @@ function Mpage() {
             }))
           };
         });
+
+        
 
         const results = await Promise.all(weatherPromises);
         setCitiesData(results);
@@ -130,10 +156,12 @@ function Mpage() {
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -5 }}
           >
-            <div className="main-city-header">
-              <h2>{city.city}</h2>
-              <Metric>{Math.round(city.current.temp)}°C</Metric>
-            </div>
+          <div className="main-city-header">
+            <h2>{city.city}</h2>
+            {getCurrentWeatherIcon(city.current.weathercode)}
+            
+            <Metric>{Math.round(city.current.temp)}°C</Metric>
+          </div>
 
             <div className="main-charts">
               <div className="main-chart-container">
