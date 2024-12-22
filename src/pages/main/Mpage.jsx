@@ -33,7 +33,7 @@ function Mpage() {
   const getCurrentWeatherIcon = (weatherCode) => {
     console.log(weatherCode);
     return (
-      <div className="small-weather-icon">
+      <div className="main-small-weather-icon">
         {weatherCode <= 1 ? <Sunny /> :
          weatherCode <= 2 ? <SunClouds /> :
          (weatherCode >= 51 && weatherCode <= 55) || 

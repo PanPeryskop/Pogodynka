@@ -45,7 +45,7 @@ const getAQIColor = (aqi) => {
 
 const GetWeatherName = (weatherCode) => {
   if (weatherCode <= 1) return 'Sunny';
-  if (weatherCode <= 3) return 'Partly Cloudy';
+  if (weatherCode <= 2) return 'Partly Cloudy';
   if (weatherCode >= 45 && weatherCode <= 48) return 'Foggy';
   if (weatherCode >= 51 && weatherCode <= 55) return 'Drizzle';
   if (weatherCode >= 61 && weatherCode <= 65) return 'Rain';
@@ -59,7 +59,7 @@ const getCurrentWeatherIcon = (weatherCode) => {
   return (
     <div className="small-weather-icon">
       {weatherCode <= 1 ? <Sunny /> :
-       weatherCode <= 3 ? <SunClouds /> :
+       weatherCode <= 2 ? <SunClouds /> :
        (weatherCode >= 51 && weatherCode <= 55) || 
        (weatherCode >= 61 && weatherCode <= 65) ||
        (weatherCode >= 80 && weatherCode <= 82) ? <Rainy /> :
@@ -75,7 +75,7 @@ const getWeatherComponent = (weatherCode) => {
       <p className="weather-name">{GetWeatherName(weatherCode)}</p>
       <div className="weather-icon">
         {weatherCode <= 1 ? <Sunny /> :
-         weatherCode <= 3 ? <SunClouds /> :
+         weatherCode <= 2 ? <SunClouds /> :
          (weatherCode >= 51 && weatherCode <= 55) || 
          (weatherCode >= 61 && weatherCode <= 65) ||
          (weatherCode >= 80 && weatherCode <= 82) ? <Rainy /> :
@@ -302,7 +302,7 @@ function Forecast() {
                     <Metric>{Math.round(weather.current.wind_speed_10m)} km/h</Metric>
                     <WiWindDeg style={{
                       transform: `rotate(${weather.current.wind_direction_10m}deg)`,
-                      fontSize: '1.5rem'
+                      fontSize: '2rem'
                     }}/>
                   </div>
                 </div>

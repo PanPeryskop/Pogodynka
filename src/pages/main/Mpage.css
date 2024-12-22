@@ -161,14 +161,9 @@
   margin-bottom: 24px;
 }
 
-.header-with-icon {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-}
 
-.small-weather-icon {
+
+.main-small-weather-icon {
   transform: scale(0.275);
   height: 40px;
   display: flex;
