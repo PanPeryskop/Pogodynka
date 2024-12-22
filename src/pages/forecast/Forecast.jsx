@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { WiDaySunny, WiRain, WiSnow, WiCloudy, WiWindDeg, WiHumidity, WiStrongWind, WiRaindrops, WiDust  } from 'react-icons/wi';
+import { WiDaySunny, WiRain, WiSnow, WiCloudy, WiWindDeg, WiHumidity, WiStrongWind, WiRaindrops, WiDust, WiDayFog, WiThunderstorm } from 'react-icons/wi';
 import { MdLocationOn, MdSearch, MdMap, MdAir } from 'react-icons/md';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Card, Metric, Text } from "@tremor/react";
 import './Forecast.css';
 import NotFound from '../../components/Error.jsx';
 import Loader from '../../components/Loading.jsx';
+import Rainy from '../../components/weather/Rain.jsx';
+import Sunny from '../../components/weather/sunny.jsx';
+import Clouds from '../../components/weather/Couds.jsx';
+import SunClouds from '../../components/weather/Suncouds.jsx';
 
 const getCoordinates = async (locationId) => {
   if (locationId?.includes(',')) {
@@ -37,6 +41,49 @@ const getAQIColor = (aqi) => {
   if (aqi <= 100) return '#eab308';
   if (aqi <= 150) return '#f97316';
   return '#ef4444';
+};
+
+const GetWeatherName = (weatherCode) => {
+  if (weatherCode <= 1) return 'Sunny';
+  if (weatherCode <= 3) return 'Partly Cloudy';
+  if (weatherCode >= 45 && weatherCode <= 48) return 'Foggy';
+  if (weatherCode >= 51 && weatherCode <= 55) return 'Drizzle';
+  if (weatherCode >= 61 && weatherCode <= 65) return 'Rain';
+  if (weatherCode >= 71 && weatherCode <= 77) return 'Snow';
+  if (weatherCode >= 80 && weatherCode <= 82) return 'Rain Showers';
+  if (weatherCode >= 95) return 'Thunderstorm';
+  return 'Cloudy';
+};
+
+const getCurrentWeatherIcon = (weatherCode) => {
+  return (
+    <div className="small-weather-icon">
+      {weatherCode <= 1 ? <Sunny /> :
+       weatherCode <= 3 ? <SunClouds /> :
+       (weatherCode >= 51 && weatherCode <= 55) || 
+       (weatherCode >= 61 && weatherCode <= 65) ||
+       (weatherCode >= 80 && weatherCode <= 82) ? <Rainy /> :
+       weatherCode >= 71 && weatherCode <= 77 ? <Snowy /> :
+       <Clouds />}
+    </div>
+  );
+};
+
+const getWeatherComponent = (weatherCode) => {
+  return (
+    <div className="weather-display">
+      <p className="weather-name">{GetWeatherName(weatherCode)}</p>
+      <div className="weather-icon">
+        {weatherCode <= 1 ? <Sunny /> :
+         weatherCode <= 3 ? <SunClouds /> :
+         (weatherCode >= 51 && weatherCode <= 55) || 
+         (weatherCode >= 61 && weatherCode <= 65) ||
+         (weatherCode >= 80 && weatherCode <= 82) ? <Rainy /> :
+         weatherCode >= 71 && weatherCode <= 77 ? <Rainy /> :
+         <Clouds />}
+      </div>
+    </div>
+  );
 };
 
 
@@ -120,7 +167,7 @@ function Forecast() {
         }
 
         const [weatherResponse, airQualityResponse] = await Promise.all([
-          fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&hourly=temperature_2m,precipitation_probability,cloudcover,uv_index&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_mean,windspeed_10m_max&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,apparent_temperature&timezone=auto`),
+          fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&hourly=temperature_2m,precipitation_probability,cloudcover,uv_index,weathercode&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_mean,windspeed_10m_max,weathercode&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,apparent_temperature,weathercode&timezone=auto`),
           fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${location.lat}&longitude=${location.lon}&current=us_aqi,pm10,pm2_5,uv_index`)
         ]);
 
@@ -180,7 +227,10 @@ function Forecast() {
             whileHover={{ y: -5 }}
           >
             <div className="weather-header">
-              <h2>Current Weather</h2>
+              <div className="header-with-icon">
+                <h2 id='current-we'>Current Weather</h2>
+                {getCurrentWeatherIcon(weather.current.weathercode)}
+              </div>
               <Metric>{Math.round(weather.current.temperature_2m)}°C</Metric>
             </div>
           
@@ -269,11 +319,15 @@ function Forecast() {
           </motion.div>
 
           <div className="daily-forecast">
-            <h2>7-Day Forecast</h2>
+            <h2 id='week-forecast'>7-Day Forecast</h2>
             <div className="forecast-grid">
               {weather.daily.time.map((date, index) => (
                 <div key={date} className="day-card">
-                <h3>{new Date(date).toLocaleDateString('en-US', { weekday: 'long' })}</h3>
+                <h3 id='day-namee'>{new Date(date).toLocaleDateString('en-US', { weekday: 'long' })}</h3>
+
+                <div className="weather-icon">
+                {getWeatherComponent(weather.daily.weathercode[index])}
+                </div>
                 
                 <div className="temperature-section">
                   <div className="temp-info">

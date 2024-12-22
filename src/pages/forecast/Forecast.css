@@ -225,3 +225,66 @@
   display: flex;
   flex-direction: column;
 }
+
+.weather-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0 0 0;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.weather-name {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  padding-bottom: 15px;
+}
+
+.weather-icon {
+  transform: scale(0.8);
+  margin: 0;
+  margin-bottom: -20px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+#day-namee {
+  font-size: 1.67rem;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+#week-forecast{
+  font-size: 2rem;
+  color: white;
+  margin-top: 5px;
+}
+
+#current-we{
+  color: white;
+}
+
+.header-with-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.small-weather-icon {
+  transform: scale(0.275);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-left: -15%;
+}
