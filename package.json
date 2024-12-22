@@ -1,9 +1,9 @@
 {
-  "name": "pogodynka",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://https://panperyskop.github.io./Pogodynka",
+  "name": "pogodynka",
+  "homepage": "https://panperyskop.github.io/Pogodynka",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
