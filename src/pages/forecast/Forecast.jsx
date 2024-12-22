@@ -6,6 +6,8 @@ import { MdLocationOn, MdSearch, MdMap, MdAir } from 'react-icons/md';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Card, Metric, Text } from "@tremor/react";
 import './Forecast.css';
+import NotFound from '../../components/Error.jsx';
+import Loader from '../../components/Loading.jsx';
 
 const getCoordinates = async (locationId) => {
   if (locationId?.includes(',')) {
@@ -149,11 +151,17 @@ function Forecast() {
   }, [locationId]);
 
   if (loading) {
-    return <div className="loading">Loading weather data...</div>;
+    return <Loader />;
   }
 
   if (error) {
-    return <div className="error">{error}</div>;
+    return (
+      <div className="forecast-page">
+        <div className="forecast-content">
+          <NotFound />
+        </div>
+      </div>
+    );
   }
 
   if (!weather) {

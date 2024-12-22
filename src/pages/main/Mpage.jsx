@@ -6,6 +6,7 @@ import { MdLocationOn, MdSearch, MdMap, MdAir } from 'react-icons/md';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Card, Metric, Text } from "@tremor/react";
 import './Mpage.css';
+import Loader from '../../components/Loading';
 
 function Mpage() {
   const [mainSearch, setMainSearch] = useState('');
@@ -15,10 +16,10 @@ function Mpage() {
   const navigate = useNavigate();
 
   const popularCities = [
-    { name: 'London', coords: { lat: 51.5074, lon: -0.1278 } },
+    { name: 'London', coords: { lat: 51.5085, lon: -0.1257 } },
     { name: 'Paris', coords: { lat: 48.8566, lon: 2.3522 } },
     { name: 'New York', coords: { lat: 40.7128, lon: -74.0060 } },
-    { name: 'Tokyo', coords: { lat: 35.6762, lon: 139.6503 } },
+    { name: 'Tokyo', coords: { lat: 35.4122, lon: 139.4130 } },
     { name: 'Sydney', coords: { lat: -33.8688, lon: 151.2093 } },
     { name: 'Dubai', coords: { lat: 25.2048, lon: 55.2708 } }
   ];
@@ -89,7 +90,7 @@ function Mpage() {
     return '#ef4444';
   };
 
-  if (loading) return <div className="loading">Loading weather data...</div>;
+  if (loading) return <Loader />;
   if (error) return <div className="error">{error}</div>;
 
   return (

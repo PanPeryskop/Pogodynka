@@ -46,6 +46,7 @@
   appearance: none;
   outline: none !important;
   box-shadow: none !important;
+  
 }
 
 #main-search-input:focus {
