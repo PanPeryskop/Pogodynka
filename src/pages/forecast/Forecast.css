@@ -30,6 +30,7 @@
   grid-template-columns: 600px 1fr;
   gap: 32px;
   margin-top: 24px;
+
 }
 
 .forecast-current-card {
@@ -40,6 +41,13 @@
   height: fit-content;
   position: sticky;
   top: 100px;
+}
+
+.forecast-layout {
+  display: grid;
+  grid-template-columns: 700px 1fr;
+  gap: 32px;
+  margin-top: 24px;
 }
 
 .weather-header {
@@ -113,7 +121,7 @@
 
 .forecast-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   gap: 16px;
   margin-top: 24px;
 }
@@ -121,7 +129,7 @@
 .day-card {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 12px;
-  padding: 16px;
+  padding: 16px;;
 }
 
 /* Loading States */
@@ -171,6 +179,8 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
+  margin-right: 16px;
+  margin-left: 16px;
 }
 
 .max-temp, .min-temp {
