@@ -6,11 +6,11 @@ import { MdLocationOn, MdSearch, MdMap, MdAir } from 'react-icons/md';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Card, Metric, Text } from "@tremor/react";
 import './Mpage.css';
-import Loader from '../../components/Loading';
-import Clouds from '../../components/weather/Couds';
-import Rainy from '../../components/weather/Rain';
-import Sunny from '../../components/weather/sunny';
-import SunClouds from '../../components/weather/Suncouds';
+import Loader from '../../components/Loading.jsx';
+import Clouds from '../../components/weather/Couds.jsx';
+import Rainy from '../../components/weather/Rain.jsx';
+import Sunny from '../../components/weather/Sunnym.jsx';
+import SunClouds from '../../components/weather/Suncouds.jsx';
 
 
 function Mpage() {

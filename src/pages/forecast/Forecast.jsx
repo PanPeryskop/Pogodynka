@@ -9,7 +9,7 @@ import './Forecast.css';
 import NotFound from '../../components/Error.jsx';
 import Loader from '../../components/Loading.jsx';
 import Rainy from '../../components/weather/Rain.jsx';
-import Sunny from '../../components/weather/sunny.jsx';
+import Sunny from '../../components/weather/Sunnym.jsx';
 import Clouds from '../../components/weather/Couds.jsx';
 import SunClouds from '../../components/weather/Suncouds.jsx';
 
