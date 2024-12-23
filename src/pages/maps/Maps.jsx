@@ -44,7 +44,7 @@ function MapsPage() {
               <h2>How to Use</h2>
               <ul>
                 <li>Click on the map to place a marker</li>
-                <li>Press "Get Weather" for a forecast</li>
+                <li>Press "Check weather for this location" for a forecast</li>
                 <li>Drag the marker to refine location</li>
               </ul>
               <button className="close-button" onClick={toggleHelp}>Close</button>
