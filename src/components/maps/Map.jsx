@@ -1,12 +1,18 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import './Map.css';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import "./Map.css";
 
 const MapEvents = ({ onLocationSelect }) => {
   useMapEvents({
-    click: (e) => onLocationSelect(e.latlng)
+    click: (e) => onLocationSelect(e.latlng),
   });
   return null;
 };
@@ -22,18 +28,20 @@ function Maps() {
 
   const handleGetWeather = () => {
     if (selectedLocation) {
-      const locationId = `${selectedLocation.lat.toFixed(4)},${selectedLocation.lng.toFixed(4)}`;
+      const locationId = `${selectedLocation.lat.toFixed(
+        4
+      )},${selectedLocation.lng.toFixed(4)}`;
       navigate(`/forecast/${locationId}`);
     }
   };
 
   return (
     <div className="map-container">
-      <MapContainer 
-        center={defaultPosition} 
-        zoom={6} 
+      <MapContainer
+        center={defaultPosition}
+        zoom={6}
         scrollWheelZoom={true}
-        style={{ height: '100%', width: '100%' }}
+        style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -47,10 +55,7 @@ function Maps() {
                 <h3>Weather forecast</h3>
                 <p>Latitude: {selectedLocation.lat.toFixed(4)}</p>
                 <p>Lengitude: {selectedLocation.lng.toFixed(4)}</p>
-                <button 
-                  className="weather-button"
-                  onClick={handleGetWeather}
-                >
+                <button className="weather-button" onClick={handleGetWeather}>
                   Check weather for this location
                 </button>
               </div>
