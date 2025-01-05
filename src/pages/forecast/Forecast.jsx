@@ -23,11 +23,7 @@ const getCoordinates = async (locationId) => {
     `https://geocoding-api.open-meteo.com/v1/search?name=${locationId}&count=1&language=en&format=json`
   );
   const data = await response.json();
-  console.log('Geocoding Response:', {
-    query: locationId,
-    response: data,
-    timestamp: new Date().toISOString()
-  });
+
   if (!data.results?.length) throw new Error('Location not found');
   return { 
     lat: data.results[0].latitude, 
@@ -137,6 +133,21 @@ const getLocationName = async (lat, lon) => {
     }
   };
 
+  const getDailyHumidity = (hourlyData, index) => {
+    const start = index * 24;
+    const end = (index + 1) * 24;
+    const dayHumidity = hourlyData.slice(start, end);
+    return Math.round(dayHumidity.reduce((sum, val) => sum + val, 0) / dayHumidity.length);
+  };
+  
+  const getDailyAQI = (hourlyData, index) => {
+    const start = index * 24;
+    const end = (index + 1) * 24;
+    const dayAQI = hourlyData.slice(start, end).filter(val => val !== null);
+    return dayAQI.length ? Math.round(dayAQI.reduce((sum, val) => sum + val, 0) / dayAQI.length) : 0;
+  };
+
+
 // End of functions section
 
 function Forecast() {
@@ -144,6 +155,8 @@ function Forecast() {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [airQualityForecastData, setAirQualityForecastData] = useState(null);
+  const [humidityForecastData, setHumidityForecastData] = useState(null);
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -166,14 +179,19 @@ function Forecast() {
           }
         }
 
-        const [weatherResponse, airQualityResponse] = await Promise.all([
+        
+        const [weatherResponse, airQualityResponse, airQualityForecast, himidityForecast] = await Promise.all([
           fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&hourly=temperature_2m,precipitation_probability,cloudcover,uv_index,weathercode&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_mean,windspeed_10m_max,weathercode&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,visibility,apparent_temperature,weathercode&timezone=auto`),
-          fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${location.lat}&longitude=${location.lon}&current=us_aqi,pm10,pm2_5,uv_index`)
+          fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${location.lat}&longitude=${location.lon}&current=european_aqi,pm10,pm2_5,uv_index`),
+          fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${location.lat}&longitude=${location.lon}&hourly=european_aqi&forecast_days=7`),
+          fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&hourly=relative_humidity_2m&timezone=auto`)
         ]);
 
-        const [weatherData, airQualityData] = await Promise.all([
+        const [weatherData, airQualityData, airQualityForecastData, humidityForecastData] = await Promise.all([
           weatherResponse.json(),
-          airQualityResponse.json()
+          airQualityResponse.json(),
+          airQualityForecast.json(),
+          himidityForecast.json()
         ]);
 
         setWeather({
@@ -181,6 +199,11 @@ function Forecast() {
           airQuality: airQualityData,
           locationName: location.name
         });
+
+        setAirQualityForecastData(airQualityForecastData);
+        setHumidityForecastData(humidityForecastData);
+
+        
         setError(null);
       } catch (err) {
         console.error('Error:', err);
@@ -310,8 +333,8 @@ function Forecast() {
               <Card decoration="top" className="metric-card">
                 <div className="metric-content">
                   <Text>Air Quality</Text>
-                  <Metric style={{ color: getAQIColor(weather.airQuality.current.us_aqi) }}>
-                    {weather.airQuality.current.us_aqi} AQI
+                  <Metric style={{ color: getAQIColor(weather.airQuality.current.european_aqi) }}>
+                    {weather.airQuality.current.european_aqi} AQI
                   </Metric>
                 </div>
               </Card>
@@ -401,19 +424,19 @@ function Forecast() {
                     <WiHumidity className="icon" />
                     <div className="metric-data">
                       <span className="label">Humidity</span>
-                      <span className="value">{weather.current.relative_humidity_2m}%</span>
+                      <span className="value">
+                        {getDailyHumidity(humidityForecastData.hourly.relative_humidity_2m, index)}%
+                      </span>
                     </div>
                   </div>
-              
+
                   <div className="metric">
                     <WiDust className="icon" />
                     <div className="metric-data">
                       <span className="label">Air Quality</span>
-                      <span className="value" style={{ color: getAQIColor(weather.airQuality.current.us_aqi) }}>
-                      {weather.airQuality.current.us_aqi} AQI
+                      <span className="value" style={{ color: getAQIColor(getDailyAQI(airQualityForecastData.hourly.european_aqi, index)) }}>
+                        {getDailyAQI(airQualityForecastData.hourly.european_aqi, index)} AQI
                       </span>
-
-                      
                     </div>
                   </div>
                 </div>
