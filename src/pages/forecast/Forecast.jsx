@@ -254,7 +254,7 @@ function Forecast() {
                 <h2 id='current-we'>Current Weather</h2>
                 {getCurrentWeatherIcon(weather.current.weathercode)}
               </div>
-              <Metric>{Math.round(weather.current.temperature_2m)}°C</Metric>
+              <Metric>{Math.round(weather.current.temperature_2m)}&deg;</Metric>
             </div>
           
             <div className="charts">
@@ -356,11 +356,11 @@ function Forecast() {
                   <div className="temp-info">
                     <p className="max-temp">
                       <span className="label">Max:</span>
-                      <span className="value">{Math.round(weather.daily.temperature_2m_max[index])}°C</span>
+                      <span className="value">{Math.round(weather.daily.temperature_2m_max[index])}&deg;</span>
                     </p>
                     <p className="min-temp">
                       <span className="label">Min:</span>
-                      <span className="value">{Math.round(weather.daily.temperature_2m_min[index])}°C</span>
+                      <span className="value">{Math.round(weather.daily.temperature_2m_min[index])}&deg;</span>
                     </p>
                   </div>
                   
