@@ -23,10 +23,10 @@ const StyledWrapper = styled.div`
     border: none;
     cursor: pointer;
     --border-right: 6px;
-    --text-stroke-color: rgba(255, 255, 255, 0.6);
+    --text-stroke-color: rgba(255,255,255,0.6);
     --animation-color: #8b5cf6;
     --fs-size: 1.5em;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-decoration: none;
     font-size: var(--fs-size);
     font-family: Inter, system-ui, sans-serif;
@@ -36,12 +36,16 @@ const StyledWrapper = styled.div`
     -webkit-text-stroke: 1px var(--text-stroke-color);
   }
 
+  .actual-text {
+    -webkit-text-stroke: 1px var(--text-stroke-color);
+  }
+
   .hover-text {
     position: absolute;
     box-sizing: border-box;
     content: attr(data-text);
     color: var(--animation-color);
-    width: 0%;
+    width: 0%; 
     inset: 0;
     border-right: var(--border-right) solid var(--animation-color);
     overflow: hidden;
@@ -52,9 +56,6 @@ const StyledWrapper = styled.div`
   .button:hover .hover-text {
     width: 100%;
     filter: drop-shadow(0 0 23px var(--animation-color));
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    -webkit-background-clip: text;
-    background-clip: text;
   }
 `;
 
