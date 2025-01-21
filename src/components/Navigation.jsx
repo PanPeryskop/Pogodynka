@@ -2,6 +2,7 @@ import './Navigation.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { MdSearch } from 'react-icons/md';
+import LogoAnimated from './Logo';
 
 function NavigationBar() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,10 +20,10 @@ function NavigationBar() {
     <nav className="navbar">
       <div className="nav-container">
         <div 
-          className="nav-logo" 
+          // className="nav-logo" 
           onClick={() => navigate('/')}
         >
-          Pogodynka
+          <LogoAnimated />
         </div>
         <ul className="nav-menu">
           <li className="nav-item">

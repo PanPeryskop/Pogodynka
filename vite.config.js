@@ -13,7 +13,7 @@ export default defineConfig({
 //   plugins: [react()],
 //   base: '/',
 //   preview: {
-//     host: true, // Enable all interfaces
+//     host: true, 
 //     port: 30785,
 //     https: false
 //   },
@@ -22,3 +22,5 @@ export default defineConfig({
 //     assetsDir: 'assets'
 //   }
 // })
+
+// 
