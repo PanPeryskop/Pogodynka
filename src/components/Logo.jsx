@@ -23,7 +23,7 @@ const StyledWrapper = styled.div`
     border: none;
     cursor: pointer;
     --border-right: 6px;
-    --text-stroke-color: rgba(255,255,255,0.6);
+    --text-stroke-color: rgba(255, 255, 255, 0.6);
     --animation-color: #8b5cf6;
     --fs-size: 1.5em;
     letter-spacing: 3px;
@@ -34,6 +34,13 @@ const StyledWrapper = styled.div`
     text-transform: uppercase;
     color: transparent;
     -webkit-text-stroke: 1px var(--text-stroke-color);
+    outline: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   .actual-text {
@@ -45,7 +52,7 @@ const StyledWrapper = styled.div`
     box-sizing: border-box;
     content: attr(data-text);
     color: var(--animation-color);
-    width: 0%; 
+    width: 0%;
     inset: 0;
     border-right: var(--border-right) solid var(--animation-color);
     overflow: hidden;
