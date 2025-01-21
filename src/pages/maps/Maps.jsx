@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Maps from '../../components/maps/Map.jsx';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Maps from "../../components/maps/Map.jsx";
 // import NavigationBar from '../../components/Navigation.jsx';
-import './Maps.css';
+import "./Maps.css";
 
 function MapsPage() {
   const navigate = useNavigate();
@@ -15,12 +15,11 @@ function MapsPage() {
       setTimeout(() => {
         setShowHelp(false);
         setIsClosing(false);
-      }, 800); 
+      }, 800);
     } else {
       setShowHelp(true);
     }
   };
-
 
   return (
     <div className="maps-page">
@@ -35,10 +34,12 @@ function MapsPage() {
           <Maps />
         </div>
 
-        <button className="help-button" onClick={toggleHelp}>?</button>
+        <button className="help-button" onClick={toggleHelp}>
+          ?
+        </button>
 
         {showHelp && (
-          <div className={`help-popup ${isClosing ? 'close' : ''}`}>
+          <div className={`help-popup ${isClosing ? "close" : ""}`}>
             <div className="help-overlay" onClick={toggleHelp}></div>
             <div className="help-content">
               <h2>How to Use</h2>
@@ -46,8 +47,14 @@ function MapsPage() {
                 <li>Click on the map to place a marker</li>
                 <li>Drag the marker to refine location</li>
                 <li>Press "Check weather for this location" for a forecast</li>
+                <li>
+                  If window doesn't appear, try double-clicking on the city or
+                  marker
+                </li>
               </ul>
-              <button className="close-button" onClick={toggleHelp}>Close</button>
+              <button className="close-button" onClick={toggleHelp}>
+                Close
+              </button>
             </div>
           </div>
         )}
