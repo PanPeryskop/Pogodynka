@@ -4,6 +4,7 @@ import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from 'rec
 import { WiWindDeg } from 'react-icons/wi';
 import { Card, Text, Metric } from '@tremor/react';
 
+
 export default function CurrentWeather({ weather, getAQIColor, getCurrentWeatherIcon }) {
   return (
     <motion.div

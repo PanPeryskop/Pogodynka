@@ -11,6 +11,7 @@ import Clouds from '../../components/weather/Couds.jsx';
 import Rainy from '../../components/weather/Rain.jsx';
 import Sunny from '../../components/weather/Sunnym.jsx';
 import SunClouds from '../../components/weather/Suncouds.jsx';
+import Switch from '../../components/Switch.jsx';
 
 
 function Mpage() {
@@ -18,7 +19,48 @@ function Mpage() {
   const [citiesData, setCitiesData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showGradients, setShowGradients] = useState(() => 
+    JSON.parse(localStorage.getItem('showGradients') ?? 'true')
+  );
   const navigate = useNavigate();
+
+  const toggleGradients = () => {
+    const newValue = !showGradients;
+    setShowGradients(newValue);
+    localStorage.setItem('showGradients', JSON.stringify(newValue));
+  };
+
+  function getBackgroundGradient(weatherCode) {
+    if (showGradients) return 'rgba(255, 255, 255, 0.05)'; 
+    
+    const gradients = {
+      clear: 'linear-gradient(to bottom, rgba(167, 139, 250, 0.25), rgba(253, 186, 116, 0.15))',
+      partlyCloudy: 'linear-gradient(to bottom, rgba(167, 139, 250, 0.2), rgba(203, 213, 225, 0.15))',
+      cloudy: 'linear-gradient(to bottom, rgba(148, 163, 184, 0.2), rgba(71, 85, 105, 0.15))',
+      foggy: 'linear-gradient(to bottom, rgba(203, 213, 225, 0.2), rgba(100, 116, 139, 0.15))',
+      drizzle: 'linear-gradient(to bottom, rgba(147, 197, 253, 0.2), rgba(139, 92, 246, 0.15))',
+      rain: 'linear-gradient(to bottom, rgba(96, 165, 250, 0.2), rgba(139, 92, 246, 0.15))',
+      snow: 'linear-gradient(to bottom, rgba(226, 232, 240, 0.25), rgba(147, 197, 253, 0.15))',
+      thunderstorm: 'linear-gradient(to bottom, rgba(139, 92, 246, 0.25), rgba(88, 28, 135, 0.2))'
+    };
+
+    document.documentElement.style.setProperty('--weather-transition', '1.5s');
+
+    if (weatherCode === 0) return gradients.clear;
+    if (weatherCode === 1) return gradients.partlyCloudy;
+    if (weatherCode === 2) return gradients.partlyCloudy;
+    if (weatherCode === 3) return gradients.cloudy;
+    if (weatherCode >= 45 && weatherCode <= 48) return gradients.foggy;
+    if (weatherCode >= 51 && weatherCode <= 55) return gradients.drizzle;
+    if (weatherCode >= 56 && weatherCode <= 57 || weatherCode >= 66 && weatherCode <= 67) return gradients.rain;
+    if (weatherCode >= 61 && weatherCode <= 65) return gradients.rain;
+    if (weatherCode >= 71 && weatherCode <= 77) return gradients.snow;
+    if (weatherCode >= 80 && weatherCode <= 82) return gradients.rain;
+    if (weatherCode >= 85 && weatherCode <= 86) return gradients.snow;
+    if (weatherCode >= 95 && weatherCode <= 99) return gradients.thunderstorm;
+    
+    return gradients.clear;
+  }
 
   const popularCities = [
     { name: 'London', coords: { lat: 51.5085, lon: -0.1257 } },
@@ -30,17 +72,23 @@ function Mpage() {
   ];
 
   
-  const getCurrentWeatherIcon = (weatherCode) => {
-    console.log(weatherCode);
+    const getCurrentWeatherIcon = (weatherCode) => {
     return (
       <div className="main-small-weather-icon">
-        {weatherCode <= 1 ? <Sunny /> :
-         weatherCode <= 2 ? <SunClouds /> :
-         (weatherCode >= 51 && weatherCode <= 55) || 
-         (weatherCode >= 61 && weatherCode <= 65) ||
-         (weatherCode >= 80 && weatherCode <= 82) ? <Rainy /> :
-         weatherCode >= 71 && weatherCode <= 77 ? <Rainy /> :
-         <Clouds />}
+        {
+          weatherCode === 0 ? <Sunny /> :
+          weatherCode === 1 ? <Sunny /> :
+          weatherCode === 2 ? <SunClouds /> :
+          weatherCode === 3 ? <Clouds /> :
+          weatherCode >= 45 && weatherCode <= 48 ? <Clouds /> :
+          weatherCode >= 51 && weatherCode <= 57 ? <Rainy /> :
+          (weatherCode >= 61 && weatherCode <= 67) ? <Rainy /> :
+          weatherCode >= 71 && weatherCode <= 77 ? <Rainy /> :
+          weatherCode >= 80 && weatherCode <= 82 ? <Rainy /> :
+          weatherCode >= 85 && weatherCode <= 86 ? <Rainy /> :
+          weatherCode >= 95 && weatherCode <= 99 ? <Rainy /> :
+          <Clouds />
+        }
       </div>
     );
   };
@@ -142,6 +190,10 @@ function Mpage() {
           >
             <MdMap /> Open Map
           </motion.button>
+          <Switch
+            checked={showGradients}
+            onChange={toggleGradients}
+          />
         </form>
       </div>
 
@@ -155,6 +207,7 @@ function Mpage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -5 }}
+            style={{ background: getBackgroundGradient(city.current.weathercode) }}
           >
           <div className="main-city-header">
             <h2>{city.city}</h2>

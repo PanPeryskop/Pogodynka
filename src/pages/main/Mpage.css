@@ -170,3 +170,35 @@
   align-items: center;
   margin-left: calc(-120px);
 }
+
+
+:root {
+  --weather-transition: 1.5s;
+}
+
+.day-card {
+  transition: background var(--weather-transition) ease;
+}
+
+.forecast-current-card {
+  transition: background var(--weather-transition) ease;
+}
+
+.main-city-card {
+  transition: background var(--weather-transition) ease;
+}
+
+.gradient-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  color: hsl(240 5% 64.9%);
+  transition: all 0.2s ease;
+}
+
+.gradient-toggle:hover {
+  color: white;
+  transform: scale(1.1);
+}

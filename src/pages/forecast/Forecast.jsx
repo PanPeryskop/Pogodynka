@@ -42,16 +42,26 @@ const getAQIColor = (aqi) => {
 };
 
 const GetWeatherName = (weatherCode) => {
-  if (weatherCode <= 1) return 'Sunny';
-  if (weatherCode <= 2) return 'Partly Cloudy';
-  if (weatherCode >= 45 && weatherCode <= 48) return 'Foggy';
-  if (weatherCode >= 51 && weatherCode <= 55) return 'Drizzle';
-  if (weatherCode >= 61 && weatherCode <= 65) return 'Rain';
-  if (weatherCode >= 71 && weatherCode <= 77) return 'Snow';
-  if (weatherCode >= 80 && weatherCode <= 82) return 'Rain Showers';
-  if (weatherCode >= 95) return 'Thunderstorm';
+  if (weatherCode === 0) return 'Clear';
+  if (weatherCode === 1) return 'Mostly Clear';
+  if (weatherCode === 2) return 'Partly Cloudy';
+  if (weatherCode === 3) return 'Overcast';
+  if (weatherCode >= 45 && weatherCode <= 48) return weatherCode === 48 ? 'Icy Fog' : 'Foggy';
+  if (weatherCode >= 51 && weatherCode <= 55) return weatherCode === 55 ? 'Heavy Drizzle' : (weatherCode === 53 ? 'Drizzle' : 'Light Drizzle');
+  if (weatherCode >= 61 && weatherCode <= 65) return weatherCode === 65 ? 'Heavy Rain' : (weatherCode === 63 ? 'Rain' : 'Light Rain');
+  if (weatherCode >= 71 && weatherCode <= 77) return weatherCode === 75 ? 'Heavy Snow' : (weatherCode === 73 ? 'Snow' : (weatherCode === 77 ? 'Snow Grains' : 'Light Snow'));
+  if (weatherCode >= 80 && weatherCode <= 82) return weatherCode === 82 ? 'Heavy Showers' : (weatherCode === 81 ? 'Showers' : 'Light Showers');
+  if (weatherCode >= 85 && weatherCode <= 86) return weatherCode === 86 ? 'Snow Showers' : 'Light Snow Showers';
+  if (weatherCode >= 95 && weatherCode <= 99) return weatherCode === 99 ? 'T-storm w/ Hail' : (weatherCode === 96 ? 'Light T-storm w/ Hail' : 'Thunderstorm');
+  if (weatherCode >= 56 && weatherCode <= 67) {
+    if (weatherCode === 56) return 'Light Freezing Drizzle';
+    if (weatherCode === 57) return 'Freezing Drizzle';
+    if (weatherCode === 66) return 'Light Freezing Rain';
+    if (weatherCode === 67) return 'Freezing Rain';
+  }
   return 'Cloudy';
 };
+
 
 const getCurrentWeatherIcon = (weatherCode) => {
   return (

@@ -2,6 +2,7 @@ import React from 'react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from 'recharts';
 import { WiStrongWind, WiRaindrops, WiHumidity, WiDust } from 'react-icons/wi';
 
+
 export default function DailyForecast({
   weather,
   humidityForecastData,
