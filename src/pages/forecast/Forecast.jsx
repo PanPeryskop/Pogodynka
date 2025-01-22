@@ -12,6 +12,8 @@ import Rainy from '../../components/weather/Rain.jsx';
 import Sunny from '../../components/weather/Sunnym.jsx';
 import Clouds from '../../components/weather/Couds.jsx';
 import SunClouds from '../../components/weather/Suncouds.jsx';
+import DailyForecast from '../../components/forecast/DailyForecast.jsx';
+import CurrentWeather from '../../components/forecast/CurrentWeather.jsx';
 
 const getCoordinates = async (locationId) => {
   if (locationId?.includes(',')) {
@@ -243,207 +245,21 @@ function Forecast() {
         </header>
   
         <div className="forecast-layout">
-          <motion.div 
-            className="forecast-current-card"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -5 }}
-          >
-            <div className="weather-header">
-              <div className="header-with-icon">
-                <h2 id='current-we'>Current Weather</h2>
-                {getCurrentWeatherIcon(weather.current.weathercode)}
-              </div>
-              <Metric>{Math.round(weather.current.temperature_2m)}&deg;</Metric>
-            </div>
-          
-            <div className="charts">
-              <div className="chart-container">
-                <h3>24h Temperature</h3>
-                <ResponsiveContainer width="100%" height={100}>
-                  <AreaChart data={weather.hourly.time.slice(0, 24).map((time, i) => ({
-                    time: new Date(time).getHours() + 'h',
-                    temp: weather.hourly.temperature_2m[i]
-                  }))}>
-                    <defs>
-                      <linearGradient id="tempGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
-                    <XAxis dataKey="time" tick={{fontSize: 12}} />
-                    <YAxis hide domain={['auto', 'auto']} />
-                    <Tooltip />
-                    <Area
-                      type="monotone"
-                      dataKey="temp"
-                      stroke="#8b5cf6"
-                      fill="url(#tempGradient)"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-          
-              <div className="chart-container">
-                <h3>Precipitation</h3>
-                <ResponsiveContainer width="100%" height={100}>
-                  <AreaChart data={weather.hourly.time.slice(0, 24).map((time, i) => ({
-                    time: new Date(time).getHours() + 'h',
-                    rain: weather.hourly.precipitation_probability[i]
-                  }))}>
-                    <defs>
-                      <linearGradient id="rainGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#22c55e" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="#22c55e" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
-                    <XAxis dataKey="time" tick={{fontSize: 12}} />
-                    <YAxis hide domain={[0, 100]} />
-                    <Tooltip />
-                    <Area
-                      type="monotone"
-                      dataKey="rain"
-                      stroke="#22c55e"
-                      fill="url(#rainGradient)"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          
-            <div className="city-details">
-              <Card decoration="top" className="metric-card">
-                <div className="metric-content">
-                  <Text>Humidity</Text>
-                  <Metric>{weather.current.relative_humidity_2m}%</Metric>
-                </div>
-              </Card>
-              <Card decoration="top" className="metric-card">
-                <div className="metric-content">
-                  <Text>Wind</Text>
-                  <div className="wind-info">
-                    <Metric>{Math.round(weather.current.wind_speed_10m)} km/h</Metric>
-                    <WiWindDeg style={{
-                      transform: `rotate(${weather.current.wind_direction_10m}deg)`,
-                      fontSize: '2rem'
-                    }}/>
-                  </div>
-                </div>
-              </Card>
-              <Card decoration="top" className="metric-card">
-                <div className="metric-content">
-                  <Text>Air Quality</Text>
-                  <Metric style={{ color: getAQIColor(weather.airQuality.current.european_aqi) }}>
-                    {weather.airQuality.current.european_aqi} AQI
-                  </Metric>
-                </div>
-              </Card>
-            </div>
-          </motion.div>
+          <CurrentWeather
+            weather={weather}
+            getAQIColor={getAQIColor}
+            getCurrentWeatherIcon={getCurrentWeatherIcon}
+          />
 
-          <div className="daily-forecast">
-            <h2 id='week-forecast'>7-Day Forecast</h2>
-            <div className="forecast-grid">
-              {weather.daily.time.map((date, index) => (
-                <div key={date} className="day-card">
-                <h3 id='day-namee'>{new Date(date).toLocaleDateString('en-US', { weekday: 'long' })}</h3>
-
-                <div className="weather-icon">
-                {getWeatherComponent(weather.daily.weathercode[index])}
-                </div>
-                
-                <div className="temperature-section">
-                  <div className="temp-info">
-                    <p className="max-temp">
-                      <span className="label">Max:</span>
-                      <span className="value">{Math.round(weather.daily.temperature_2m_max[index])}&deg;</span>
-                    </p>
-                    <p className="min-temp">
-                      <span className="label">Min:</span>
-                      <span className="value">{Math.round(weather.daily.temperature_2m_min[index])}&deg;</span>
-                    </p>
-                  </div>
-                  
-                  <div className="chart-container">
-                    <ResponsiveContainer width="100%" height={100}>
-                      <AreaChart data={weather.hourly.time.slice(index * 24, (index + 1) * 24).map((time, i) => ({
-                        time: new Date(time).getHours() + 'h',
-                        temp: weather.hourly.temperature_2m[i + index * 24]
-                      }))}>
-                        <XAxis dataKey="time" tick={{fontSize: 10}} />
-                        <YAxis hide domain={['auto', 'auto']} />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="temp" stroke="#8b5cf6" fill="url(#tempGradient)" />
-                      </AreaChart>
-                    </ResponsiveContainer>
-
-                    <ResponsiveContainer width="100%" height={100}>
-                      <AreaChart data={weather.hourly.time.slice(index * 24, (index + 1) * 24).map((time, i) => ({
-                        time: new Date(time).getHours() + 'h',
-                        precipitation: weather.hourly.precipitation_probability[i + index * 24]
-                      }))}>
-                        <defs>
-                          <linearGradient id="rainGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#22c55e" stopOpacity={0.8}/>
-                            <stop offset="95%" stopColor="#22c55e" stopOpacity={0}/>
-                          </linearGradient>
-                        </defs>
-                        <XAxis dataKey="time" tick={{fontSize: 10}} />
-                        <YAxis hide domain={[0, 100]} />
-                        <Tooltip />
-                        <Area 
-                          type="monotone" 
-                          dataKey="precipitation" 
-                          stroke="#22c55e" 
-                          fill="url(#rainGradient)"
-                          unit="%"
-                        />
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-              
-                <div className="weather-metrics">
-                  <div className="metric">
-                    <WiStrongWind className="icon" />
-                    <div className="metric-data">
-                      <span className="label">Wind</span>
-                      <span className="value">{Math.round(weather.daily.windspeed_10m_max[index])} km/h</span>
-                    </div>
-                  </div>
-              
-                  <div className="metric">
-                    <WiRaindrops className="icon" />
-                    <div className="metric-data">
-                      <span className="label">Precipitation</span>
-                      <span className="value">{weather.daily.precipitation_probability_mean[index]}%</span>
-                    </div>
-                  </div>
-              
-                  <div className="metric">
-                    <WiHumidity className="icon" />
-                    <div className="metric-data">
-                      <span className="label">Humidity</span>
-                      <span className="value">
-                        {getDailyHumidity(humidityForecastData.hourly.relative_humidity_2m, index)}%
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="metric">
-                    <WiDust className="icon" />
-                    <div className="metric-data">
-                      <span className="label">Air Quality</span>
-                      <span className="value" style={{ color: getAQIColor(getDailyAQI(airQualityForecastData.hourly.european_aqi, index)) }}>
-                        {getDailyAQI(airQualityForecastData.hourly.european_aqi, index)} AQI
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              ))}
-            </div>
-          </div>
+          <DailyForecast
+            weather={weather}
+            humidityForecastData={humidityForecastData}
+            airQualityForecastData={airQualityForecastData}
+            getWeatherComponent={getWeatherComponent}
+            getDailyHumidity={getDailyHumidity}
+            getDailyAQI={getDailyAQI}
+            getAQIColor={getAQIColor}
+          />
         </div>
       </div>
     </div>
