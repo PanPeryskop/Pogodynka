@@ -34,14 +34,14 @@ function Mpage() {
     if (showGradients) return 'rgba(255, 255, 255, 0.05)'; 
     
     const gradients = {
-      clear: 'linear-gradient(to bottom, rgba(167, 139, 250, 0.25), rgba(253, 186, 116, 0.15))',
-      partlyCloudy: 'linear-gradient(to bottom, rgba(167, 139, 250, 0.2), rgba(203, 213, 225, 0.15))',
-      cloudy: 'linear-gradient(to bottom, rgba(148, 163, 184, 0.2), rgba(71, 85, 105, 0.15))',
-      foggy: 'linear-gradient(to bottom, rgba(203, 213, 225, 0.2), rgba(100, 116, 139, 0.15))',
-      drizzle: 'linear-gradient(to bottom, rgba(147, 197, 253, 0.2), rgba(139, 92, 246, 0.15))',
-      rain: 'linear-gradient(to bottom, rgba(96, 165, 250, 0.2), rgba(139, 92, 246, 0.15))',
-      snow: 'linear-gradient(to bottom, rgba(226, 232, 240, 0.25), rgba(147, 197, 253, 0.15))',
-      thunderstorm: 'linear-gradient(to bottom, rgba(139, 92, 246, 0.25), rgba(88, 28, 135, 0.2))'
+      clear: 'linear-gradient(45deg, rgba(167, 139, 250, 0.25) 0%, rgba(253, 186, 116, 0.15) 50%, rgba(167, 139, 250, 0.25) 100%)',
+      partlyCloudy: 'linear-gradient(45deg, rgba(167, 139, 250, 0.2) 0%, rgba(203, 213, 225, 0.15) 50%, rgba(167, 139, 250, 0.2) 100%)',
+      cloudy: 'linear-gradient(45deg, rgba(148, 163, 184, 0.2) 0%, rgba(71, 85, 105, 0.15) 50%, rgba(148, 163, 184, 0.2) 100%)',
+      foggy: 'linear-gradient(45deg, rgba(203, 213, 225, 0.2) 0%, rgba(100, 116, 139, 0.15) 50%, rgba(203, 213, 225, 0.2) 100%)',
+      drizzle: 'linear-gradient(45deg, rgba(147, 197, 253, 0.2) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(147, 197, 253, 0.2) 100%)',
+      rain: 'linear-gradient(45deg, rgba(96, 165, 250, 0.2) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(96, 165, 250, 0.2) 100%)',
+      snow: 'linear-gradient(45deg, rgba(226, 232, 240, 0.25) 0%, rgba(147, 197, 253, 0.15) 50%, rgba(226, 232, 240, 0.25) 100%)',
+      thunderstorm: 'linear-gradient(45deg, rgba(139, 92, 246, 0.25) 0%, rgba(88, 28, 135, 0.2) 50%, rgba(139, 92, 246, 0.25) 100%)'
     };
 
     document.documentElement.style.setProperty('--weather-transition', '1.5s');
