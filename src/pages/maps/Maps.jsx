@@ -45,7 +45,6 @@ function MapsPage() {
               <h2>How to Use</h2>
               <ul>
                 <li>Click on the map to place a marker</li>
-                <li>Drag the marker to refine location</li>
                 <li>Press "Check weather for this location" for a forecast</li>
                 <li>
                   If window doesn't appear, try double-clicking on the city or
