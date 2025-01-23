@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Maps from "../../components/maps/Map.jsx";
-// import NavigationBar from '../../components/Navigation.jsx';
+import HelpButton from "../../components/Help.jsx";
 import "./Maps.css";
 
 function MapsPage() {
@@ -23,7 +23,6 @@ function MapsPage() {
 
   return (
     <div className="maps-page">
-      {/* <NavigationBar /> */}
       <div className="maps-content">
         <header className="maps-header">
           <h1>Interactive Weather Map</h1>
@@ -34,29 +33,11 @@ function MapsPage() {
           <Maps />
         </div>
 
-        <button className="help-button" onClick={toggleHelp}>
-          ?
-        </button>
-
-        {showHelp && (
-          <div className={`help-popup ${isClosing ? "close" : ""}`}>
-            <div className="help-overlay" onClick={toggleHelp}></div>
-            <div className="help-content">
-              <h2>How to Use</h2>
-              <ul>
-                <li>Click on the map to place a marker</li>
-                <li>Press "Check weather for this location" for a forecast</li>
-                <li>
-                  If window doesn't appear, try double-clicking on the city or
-                  marker
-                </li>
-              </ul>
-              <button className="close-button" onClick={toggleHelp}>
-                Close
-              </button>
-            </div>
-          </div>
-        )}
+        <HelpButton 
+          onClick={toggleHelp}
+          showHelp={showHelp}
+          isClosing={isClosing}
+        />
       </div>
     </div>
   );
