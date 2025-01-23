@@ -1,13 +1,13 @@
 # Pogodynka - projekt AMIW
 
-### Apliakcja: [pogodynka.almeron.online](http://pogodynka.almeron.online)
+### Aplikacja: [pogodynka.almeron.online](http://pogodynka.almeron.online)
 
 
 ## Funkcje
 
 - **Aktualna Pogoda**: Wyświetla temperaturę, wilgotność, prędkość/kierunek wiatru i jakość powietrza. Kierunek wyświetlany jest w formie "strzałki" skierowanej w odpowiednim kierunku.
 - **Prognoza 7-dniowa**: Prognoza pogody z temperaturą, prawdopodobieństwem opadów, wiatrem, wilgotnością oraz jakością powietrza.
-- **Interaktywna Mapa**: Apliakcja posiada zakładkę ```Maps```. W tej zakładce użytkownik może wybrać dowolne miejsce na mapie i sprawdzic prognozę pogody dla tego miejsca. W prawym dolnym rogu znajduje się przycisk help, który wyświetla wskazówki jak sprawdzić prognozę na mapie.
+- **Interaktywna Mapa**: Aplikacja posiada zakładkę ```Maps```. W tej zakładce użytkownik może wybrać dowolne miejsce na mapie i sprawdzic prognozę pogody dla tego miejsca. W prawym dolnym rogu znajduje się przycisk help, który wyświetla wskazówki jak sprawdzić prognozę na mapie.
 - **Wyszukiwanie Lokalizacji**: W prawym górnym rogu w pasku nawigacji oraz na środku strony głównej można wyszukac prognozę dla wybranego miejsca.
 - **Responsywność**: Działa na komputerach i urządzeniach mobilnych
 - **Animacje Pogodowe**: Unikatowe animacje ikon dla różnych warunków pogodowych. Gdy wyłączy się ```Switch``` na stronie główne, włączane jest także animowane tło kafelka, które koresponduje z aktualną pogoda w mieście.
