@@ -1,5 +1,8 @@
 # Pogodynka - projekt AMIW
 
+### Apliakcja: [pogodynka.almeron.online](http://pogodynka.almeron.online)
+
+
 ## Funkcje
 
 - **Aktualna Pogoda**: Wyświetla temperaturę, wilgotność, prędkość/kierunek wiatru i jakość powietrza. Kierunek wyświetlany jest w formie "strzałki" skierowanej w odpowiednim kierunku.
