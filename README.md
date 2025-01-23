@@ -7,7 +7,7 @@
 - **Interaktywna Mapa**: Apliakcja posiada zakładkę ```Maps```. W tej zakładce użytkownik może wybrać dowolne miejsce na mapie i sprawdzic prognozę pogody dla tego miejsca. W prawym dolnym rogu znajduje się przycisk help, który wyświetla wskazówki jak sprawdzić prognozę na mapie.
 - **Wyszukiwanie Lokalizacji**: W prawym górnym rogu w pasku nawigacji oraz na środku strony głównej można wyszukac prognozę dla wybranego miejsca.
 - **Responsywność**: Działa na komputerach i urządzeniach mobilnych
-- **Animacje Pogodowe**: Unikalne animacje ikon dla różnych warunków pogodowych. Gdy wyłączy się ```Switch``` na stronie główne, włączane jest także animowane tło kafelka, które koresponduje z aktualną pogoda w mieście.
+- **Animacje Pogodowe**: Unikatowe animacje ikon dla różnych warunków pogodowych. Gdy wyłączy się ```Switch``` na stronie główne, włączane jest także animowane tło kafelka, które koresponduje z aktualną pogoda w mieście.
 - **Indeks Jakości Powietrza**: Dane jakości powietrza (Europejski AQI).
 - **Wykresy Pogodowe**: Wizualizacja prognozy pogody w formie wykresów przy użyciu biblioteki [Recharts](https://recharts.org/). Wykresy przedstawiają opady oraz temperature. 
 
