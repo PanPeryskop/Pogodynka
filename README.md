@@ -18,7 +18,7 @@
 - [Geocoding API](https://open-meteo.com/en/docs/geocoding-api)
 
 ## Aplikacja a wymagania:
-- Wykozystanie wyżej wymienionych api 
+- Wykorzystanie wyżej wymienionych API 
 - Wykorzystanie komponentow - (kazdy dzien posiada osobny komponent z prognoza pogody, zgodnie z wymaganiami komponenty z aktualną pogodą znajdują się w ```src/components/forecast/CurrentWeather.jsx``` oraz komponenty z prognozą na kolejne dni w ```src/components/forecast/DailyForecast.jsx```)
 - Pobieranie danych asynchroniczne 
 - Aktualna prognoza pogody dla wybranego miejsca na swiecie -  wyszkiwarka miejsc oraz zakładka ```'Maps'```
