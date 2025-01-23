@@ -26,4 +26,4 @@
 - Informacje o terazniejszej pogodzie - zakladka ```'Forecast'```
 - Komponenty sa odpowiednio odgraniczone, kazdy posiada kafelek ktory odpowiada za dane informacje
 - Responsywnosc - strona dostosowuje sie do szerokosci, dziala rowniez na urzadzeniach mobilnych
-- Zmiana tła w zależności od warunków pogodowych poprzez `Switch` w kafelkach (domyślnie wyłączona ze względu na moją wizję  designu strony, możliwość włączenia przez użytkownika)
+- Zmiana tła w zależności od warunków pogodowych poprzez `Switch` w kafelkach (domyślnie wyłączona ze względu na moją wizję  designu strony, możliwość włączenia przez użytkownika)  
