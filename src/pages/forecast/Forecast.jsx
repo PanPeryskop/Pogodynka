@@ -136,7 +136,7 @@ const getLocationName = async (lat, lon) => {
       
     } catch (err) {
       console.error('IP location failed:', err);
-      // Fallback to default location
+      
       return {
         lat: 52.2297,
         lon: 21.0122,
