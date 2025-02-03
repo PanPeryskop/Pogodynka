@@ -6,7 +6,6 @@
 
 *An elegant weather forecast application with interactive maps and real-time data visualization*
 </div>
---- 
 <details>
 <summary>🎯 Features</summary>
 
