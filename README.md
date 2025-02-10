@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🌦️ Pogodynka - Weather Forecast App
-[<img src="https://img.shields.io/badge/Live%20Preview-success?style=for-the-badge">](http://pogodynka.almeron.online)
+[<img src="https://img.shields.io/badge/%20Preview-success?style=for-the-badge">](http://pogodynka.almeron.online)
 [<img src="https://img.shields.io/badge/React-18.2.0-blue?style=for-the-badge&logo=react">](https://reactjs.org/)
 
 *An elegant weather forecast application with interactive maps and real-time data visualization*
